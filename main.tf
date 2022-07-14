@@ -16,7 +16,7 @@ provider "azurerm" {
 }
 
 locals {
-  rg-name        = "1-2e2b8103-playground-sandbox"
+  rg-name        = "1-4a4cf109-playground-sandbox"
   prefix-onprem  = "onprem"
   prefix-hub     = "hub"
   prefix-hub-nva = "hub-nva"
@@ -31,10 +31,6 @@ data "azurerm_resource_group" "onprem-vnet-rg" {
 }
 
 data "azurerm_resource_group" "hub-vnet-rg" {
-  name = local.rg-name
-}
-
-data "azurerm_resource_group" "hub-nva-rg" {
   name = local.rg-name
 }
 
