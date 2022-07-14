@@ -107,3 +107,14 @@ resource "azurerm_virtual_machine" "spoke1-vm" {
 #   use_remote_gateways          = false
 #   depends_on                   = [azurerm_virtual_network.spoke1-vnet, azurerm_virtual_network.hub-vnet, azurerm_virtual_network_gateway.hub-vnet-gateway]
 # }
+
+resource "azurerm_virtual_hub_connection" "spoke1-vhub-conn" {
+  name                      = "spoke1-vhub-conn"
+  virtual_hub_id            = azurerm_virtual_hub.main-vwan-hub.id
+  remote_virtual_network_id = azurerm_virtual_network.spoke1-vnet.id
+
+  depends_on = [
+    azurerm_virtual_hub.main-vwan-hub,
+    azurerm_virtual_network.spoke1-vnet
+  ]
+}

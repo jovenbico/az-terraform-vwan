@@ -16,21 +16,24 @@ provider "azurerm" {
 }
 
 locals {
-  rg-name        = "1-4a4cf109-playground-sandbox"
-  prefix-onprem  = "onprem"
-  prefix-hub     = "hub"
-  prefix-hub-nva = "hub-nva"
-  prefix-spoke1  = "spoke1"
-  prefix-spoke2  = "spoke2"
+  rg-name       = "1-4a4cf109-playground-sandbox"
+  prefix-onprem = "onprem"
+  prefix-ops    = "ops"
+  prefix-spoke1 = "spoke1"
+  prefix-spoke2 = "spoke2"
 
   shared-key = "4-v3ry-53cr37-1p53c-5h4r3d-k3y"
+}
+
+data "azurerm_resource_group" "hub-vwan-rg" {
+  name = local.rg-name
 }
 
 data "azurerm_resource_group" "onprem-vnet-rg" {
   name = local.rg-name
 }
 
-data "azurerm_resource_group" "hub-vnet-rg" {
+data "azurerm_resource_group" "ops-vnet-rg" {
   name = local.rg-name
 }
 
