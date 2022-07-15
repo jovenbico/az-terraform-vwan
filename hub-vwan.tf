@@ -15,9 +15,28 @@ resource "azurerm_virtual_hub" "main-vwan-hub" {
   location            = data.azurerm_resource_group.hub-vwan-rg.location
   virtual_wan_id      = azurerm_virtual_wan.main-vwan.id
   address_prefix      = "10.99.0.0/16"
+}
 
-  timeouts {
-    create = "60m"
+resource "azurerm_vpn_gateway" "main-vwan-hub-vpng" {
+  name                = "main-vwan-hub-vpng"
+  resource_group_name = data.azurerm_resource_group.hub-vwan-rg.name
+  location            = data.azurerm_resource_group.hub-vwan-rg.location
+  virtual_hub_id      = azurerm_virtual_hub.main-vwan-hub.id
+
+  depends_on = [
+    azurerm_virtual_hub.main-vwan-hub
+  ]
+}
+
+resource "azurerm_vpn_site" "main-vwan-hub-vpn-site" {
+  name                = "main-vwan-hub-vpn-site"
+  resource_group_name = data.azurerm_resource_group.hub-vwan-rg.name
+  location            = data.azurerm_resource_group.hub-vwan-rg.location
+  virtual_wan_id      = azurerm_virtual_wan.main-vwan.id
+  address_cidrs       = ["10.202.0.0/16"]
+  link {
+    name       = "vpn-site-link1"
+    ip_address = "10.202.0.1"
   }
 }
 

@@ -150,9 +150,4 @@ resource "azurerm_virtual_machine" "onprem-vm" {
 #     subnet_id                     = azurerm_subnet.onprem-gateway-subnet.id
 #   }
 #   depends_on = [azurerm_public_ip.onprem-vpn-gateway1-pip]
-
-#   timeouts {
-#     create = "60m"
-#   }
-
 # }
