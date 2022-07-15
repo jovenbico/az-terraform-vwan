@@ -84,3 +84,14 @@ resource "azurerm_subnet" "ops-dmz" {
 #     environment = local.prefix-hub
 #   }
 # }
+
+resource "azurerm_virtual_hub_connection" "ops-vhub-conn" {
+  name                      = "ops-vhub-conn"
+  virtual_hub_id            = azurerm_virtual_hub.main-vwan-hub.id
+  remote_virtual_network_id = azurerm_virtual_network.ops-vnet.id
+
+  depends_on = [
+    azurerm_virtual_hub.main-vwan-hub,
+    azurerm_virtual_network.ops-vnet
+  ]
+}

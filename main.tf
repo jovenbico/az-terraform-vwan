@@ -16,7 +16,7 @@ provider "azurerm" {
 }
 
 locals {
-  rg-name       = "1-4a4cf109-playground-sandbox"
+  rg-name       = "1-7d435b1f-playground-sandbox"
   prefix-onprem = "onprem"
   prefix-ops    = "ops"
   prefix-spoke1 = "spoke1"
