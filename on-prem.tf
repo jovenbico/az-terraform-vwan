@@ -151,3 +151,14 @@ resource "azurerm_virtual_machine" "onprem-vm" {
 #   }
 #   depends_on = [azurerm_public_ip.onprem-vpn-gateway1-pip]
 # }
+
+resource "azurerm_virtual_hub_connection" "onprem-vhub-conn" {
+  name                      = "onprem-vhub-conn"
+  virtual_hub_id            = azurerm_virtual_hub.main-vwan-hub.id
+  remote_virtual_network_id = azurerm_virtual_network.onprem-vnet.id
+
+  depends_on = [
+    azurerm_virtual_hub.main-vwan-hub,
+    azurerm_virtual_network.onprem-vnet
+  ]
+}
